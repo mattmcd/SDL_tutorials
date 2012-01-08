@@ -23,9 +23,11 @@
 void main_loop(const std::string fileName, SDL_Wrapper &sdl)
 {
 
+  sdl.init_screen( 640, 480 );
+  
   SDLImage theImage( fileName );
 
-  sdl.init_screen( theImage.get_width(), theImage.get_height() );
+  // sdl.init_screen( theImage.get_width(), theImage.get_height() );
 
   sdl.blit_surface( theImage.getPtr() );
 

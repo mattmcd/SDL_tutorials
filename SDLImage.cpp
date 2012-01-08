@@ -21,18 +21,24 @@
 
 SDLImage::SDLImage( const std::string &fileName )
 {
-  surf = IMG_Load( fileName.c_str() );
-  /* 
+  // surf = IMG_Load( fileName.c_str() );
   SDL_Surface* loadedImage = IMG_Load( fileName.c_str() );
   if ( loadedImage != NULL )
   {
-    // Create and optimzed image
+    // Create an optimzed image
     surf = SDL_DisplayFormat( loadedImage );
-    // Free the temporary loaded image
-    SDL_FreeSurface( loadedImage );
+    if ( surf == NULL )
+    {
+      // Conversion can fail, for example if the primary screen has not yet
+      // been initialized.  In this case reuse the original image.
+      surf = loadedImage;
+    } 
+    else 
+    {
+      // Free the temporary loaded image
+      SDL_FreeSurface( loadedImage );
+    }
   }
-  */
-  // surf = SDL_LoadBMP( fileName );
 }
 
 SDLImage::SDLImage( SDL_Surface* surf_ ): surf(surf_) {}
@@ -43,7 +49,6 @@ SDLImage::~SDLImage()
   {
     // Free the surface
     SDL_FreeSurface( surf );
-    std::cout << "Freed the SDL surface" << std::endl;
   }
 }
 
