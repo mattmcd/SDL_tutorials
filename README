@@ -1,0 +1,9 @@
+SDL tutorials
+=============
+
+Date: 20120108
+Author: Matt McDonnell
+
+This repository contains tutorial implementations of SDL programs in C++,
+following the tutorial at 
+[Beginning Game Programming](http://lazyfoo.net/SDL_tutorials/index.php).
