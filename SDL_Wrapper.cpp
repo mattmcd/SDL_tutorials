@@ -32,3 +32,18 @@ int SDL_Wrapper::get_init_success()
 {
   return init_success;
 }
+
+void SDL_Wrapper::init_screen( int width, int height)
+{
+  screen = SDL_SetVideoMode( width, height, 32, SDL_SWSURFACE );
+}
+
+void SDL_Wrapper::blit_surface( SDL_Surface* img)
+{
+  SDL_BlitSurface( img, NULL, screen, NULL );
+}
+
+void SDL_Wrapper::flip() 
+{
+  SDL_Flip( screen );
+}

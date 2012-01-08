@@ -1,6 +1,6 @@
 // ==============================================================
 // 
-//       Filename:  Lesson01_Image.cpp
+//       Filename:  ShowImage.cpp
 // 
 //    Description:  See
 //    http://lazyfoo.net/SDL_tutorials/lesson01/index2.php
@@ -15,24 +15,21 @@
 // 
 // ==============================================================
 
-#include "SDLImage.h"
+#include "SDLImage.hpp"
+#include "SDL_Wrapper.hpp"
 #include <SDL/SDL.h>
 #include <iostream>
 
-void main_loop(const std::string fileName)
+void main_loop(const std::string fileName, SDL_Wrapper &sdl)
 {
 
   SDLImage theImage( fileName );
 
-  SDL_Delay( 100 );
+  sdl.init_screen( theImage.get_width(), theImage.get_height() );
 
-  SDLImage screen( 
-    SDL_SetVideoMode( theImage.get_width(), theImage.get_height(), 
-    32, SDL_SWSURFACE ) );
+  sdl.blit_surface( theImage.getPtr() );
 
-  SDL_BlitSurface( theImage.getPtr(), NULL, screen.getPtr(), NULL);
-
-  SDL_Flip( screen.getPtr() );
+  sdl.flip( );
 
   SDL_Delay( 2000 );
 
@@ -40,7 +37,14 @@ void main_loop(const std::string fileName)
 
 int main( int argc, char* argv[])
 {
-  SDL_Init( SDL_INIT_EVERYTHING );
+  SDL_Wrapper sdl;
+
+  if ( sdl.get_init_success() < 0 )
+  {
+    // Early exit
+    std::cout << "SDL initialisation failed.  Exiting." << std::endl;
+    return -1;
+  }
 
   std::string fileName;
 
@@ -49,9 +53,7 @@ int main( int argc, char* argv[])
   else
     fileName = argv[1];
 
-  main_loop( fileName );
-
-  SDL_Quit();
+  main_loop( fileName, sdl );
 
   return 0;
 }

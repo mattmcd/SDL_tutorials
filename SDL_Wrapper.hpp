@@ -24,8 +24,12 @@ public:
   SDL_Wrapper();
   ~SDL_Wrapper();
   int get_init_success();
+  void init_screen( int width, int height );
+  void blit_surface( SDL_Surface* img);
+  void flip();
 private:
   int init_success;
+  SDL_Surface* screen;
 };
 
 
