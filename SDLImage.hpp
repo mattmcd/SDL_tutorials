@@ -21,6 +21,8 @@
 #include <tr1/memory>
 #include <string>
 
+typedef std::tr1::shared_ptr<SDL_Surface> surf_ptr;
+
 class SDLImage {
   public:
     SDLImage(const std::string &fileName);
@@ -30,7 +32,7 @@ class SDLImage {
     int get_width();
     int get_height();
   private:
-    SDL_Surface* surf;
+    surf_ptr surf;
 };
 
 #endif
