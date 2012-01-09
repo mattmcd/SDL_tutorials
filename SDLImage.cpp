@@ -37,7 +37,8 @@ SDLImage::SDLImage( const std::string &fileName )
 
 SDLImage::SDLImage( SDL_Surface* surf_ ): surf(surf_, SDL_FreeSurface) {}
 
-SDLImage::~SDLImage()
+SDLImage::~SDLImage() {}
+/* 
 {
   if ( surf != NULL )
   {
@@ -46,19 +47,20 @@ SDLImage::~SDLImage()
     std::cout << "Destroyed SDL Image" << std::endl;
   }
 }
+*/
 
-SDL_Surface* SDLImage::getPtr()
+SDL_Surface* SDLImage::getPtr() const
 {
   return surf.get();
 }
 
 
-int SDLImage::get_width ( )
+int SDLImage::get_width ( ) const
 {
   return surf->w;
 }		// -----  end of method SDLImage::get_width  -----
 
-int SDLImage::get_height ( )
+int SDLImage::get_height ( ) const
 {
   return surf->h;
 }		// -----  end of method SDLImage::get_height  -----

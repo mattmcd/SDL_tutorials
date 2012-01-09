@@ -18,6 +18,7 @@
 #define SDL_WRAPPER_HPP
 
 #include <SDL/SDL.h>
+#include "SDLImage.hpp"
 
 class SDL_Wrapper {
 public:
@@ -25,7 +26,7 @@ public:
   ~SDL_Wrapper();
   int get_init_success();
   void init_screen( int width, int height );
-  void blit_surface( SDL_Surface* img);
+  void blit_surface( const SDLImage &img) const;
   void flip();
 private:
   int init_success;

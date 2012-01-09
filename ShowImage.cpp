@@ -29,7 +29,7 @@ void main_loop(const std::string fileName, SDL_Wrapper &sdl)
 
   // sdl.init_screen( theImage.get_width(), theImage.get_height() );
 
-  sdl.blit_surface( theImage.getPtr() );
+  sdl.blit_surface( theImage );
 
   sdl.flip( );
 

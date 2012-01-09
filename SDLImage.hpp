@@ -28,9 +28,9 @@ class SDLImage {
     SDLImage(const std::string &fileName);
     SDLImage(SDL_Surface* surf_);
     ~SDLImage();
-    SDL_Surface* getPtr();
-    int get_width();
-    int get_height();
+    SDL_Surface* getPtr() const;
+    int get_width() const;
+    int get_height() const;
   private:
     surf_ptr surf;
 };
