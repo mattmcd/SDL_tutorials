@@ -43,6 +43,16 @@ void SDL_Wrapper::blit_surface( const SDLImage &img) const
   SDL_BlitSurface( img.getPtr(), NULL, screen, NULL );
 }
 
+void SDL_Wrapper::blit_surface( const SDLImage &img, int x, int y) const
+{
+  // Blit with offset
+  SDL_Rect offset;
+  offset.x = x;
+  offset.y = y;
+
+  SDL_BlitSurface( img.getPtr(), NULL, screen, &offset );
+}
+
 void SDL_Wrapper::flip() 
 {
   SDL_Flip( screen );
