@@ -7,3 +7,14 @@ Author: Matt McDonnell
 This repository contains tutorial implementations of SDL programs in C++,
 following the tutorial at 
 [Beginning Game Programming](http://lazyfoo.net/SDL_tutorials/index.php).
+
+Examples:
+
+ShowImage - displays an image in a 640x480 window for 2 seconds.
+Usage: ./ShowImage imageFileName
+Default image is used if imageFileName is unspecified
+
+ShowBackground - displays two images above a tiled background image, with
+color-keyed transparency on one of them.  Uses event handling to close
+window when window close button is clicked.
+Usage: ./ShowBackground
