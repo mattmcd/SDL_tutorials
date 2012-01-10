@@ -21,7 +21,7 @@
 #include <iostream>
 #include <math.h>
 
-void main_loop(const std::string fileName, SDL_Wrapper &sdl)
+int main_loop(const std::string fileName, SDL_Wrapper &sdl)
 {
   // Screen dimensions
   typedef struct {
@@ -63,8 +63,25 @@ void main_loop(const std::string fileName, SDL_Wrapper &sdl)
 
   sdl.flip( );
 
-  SDL_Delay( 2000 );
+  // Display until window exit has been clicked
+  bool done( false );
+  // Structure to hold the event
+  SDL_Event event;
 
+  while( !done )
+  {
+    // While there is an event to handle, process events
+    while( SDL_PollEvent( &event ) )
+    {
+      if( event.type == SDL_QUIT )
+      {
+        // Quit the program
+        done = true;
+      }
+    }
+  }
+
+  return 0;
 }
 
 int main( int argc, char* argv[])
@@ -82,7 +99,5 @@ int main( int argc, char* argv[])
 
   std::string fileName("smiley_col_thumb.png");
 
-  main_loop( fileName, sdl );
-
-  return 0;
+  return main_loop( fileName, sdl );
 }
