@@ -53,6 +53,11 @@ void SDL_Wrapper::blit_surface( const SDLImage &img, int x, int y) const
   SDL_BlitSurface( img.getPtr(), NULL, screen, &offset );
 }
 
+void SDL_Wrapper::set_title( const std::string title ) const 
+{
+  SDL_WM_SetCaption( title.c_str(), NULL);
+}
+
 void SDL_Wrapper::flip() 
 {
   SDL_Flip( screen );

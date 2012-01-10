@@ -29,6 +29,7 @@ class SDLImage {
     SDLImage(SDL_Surface* surf_);
     ~SDLImage();
     SDL_Surface* getPtr() const;
+    void setTransparent(int r, int g, int b) const;
     int get_width() const;
     int get_height() const;
   private:

@@ -23,21 +23,43 @@
 
 void main_loop(const std::string fileName, SDL_Wrapper &sdl)
 {
+  // Screen dimensions
+  typedef struct {
+  int w;
+  int h;
+  } ScreenDim;
 
-  sdl.init_screen( 800, 600 );
+  ScreenDim s;
+  s.w = 400;
+  s.h = 300;
+
+  sdl.init_screen( s.w, s.h );
   
-  SDLImage theImage( fileName );
-
   // Background image
   SDLImage bg( "tile100x100v03glide.jpg" );
 
-  for (int x=0; x<800; x += 100 )
-    for (int y=0; y<600; y+=100 )
+  for (int x=0; x<s.w; x += 100 )
+    for (int y=0; y<s.h; y+=100 )
       sdl.blit_surface( bg, x, y );
 
-  sdl.blit_surface( theImage, 
-    400 - floor(theImage.get_width() / 2), 
-    300 - floor(theImage.get_height() / 2));
+  // Image with color keyed transparency
+  SDLImage theImage( fileName );
+  theImage.setTransparent( 68, 68, 68);
+
+  // Image without transparency
+  // TODO: Copy method for underlying surface
+  SDLImage nonTransImage( fileName );
+
+  // Offset for edge of screen
+  int imHalfWidth = floor(theImage.get_width()/2);
+
+  // Non-transparent image
+  sdl.blit_surface( nonTransImage, floor(s.w/4) - imHalfWidth,
+    floor(s.h/2) - floor(theImage.get_height() / 2));
+  
+  // Transparent image
+  sdl.blit_surface( theImage, 3*floor(s.w/4) - imHalfWidth,
+    floor(s.h/2) - floor(theImage.get_height() / 2));
 
   sdl.flip( );
 
@@ -56,12 +78,9 @@ int main( int argc, char* argv[])
     return -1;
   }
 
-  std::string fileName;
+  sdl.set_title( "Image Transparency and Background" );
 
-  if ( argc < 2 )
-    fileName = "mattmcd_sketch.bmp";
-  else
-    fileName = argv[1];
+  std::string fileName("smiley_col_thumb.png");
 
   main_loop( fileName, sdl );
 

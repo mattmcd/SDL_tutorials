@@ -28,6 +28,7 @@ public:
   void init_screen( int width, int height );
   void blit_surface( const SDLImage &img) const;
   void blit_surface( const SDLImage &img, int x, int y) const;
+  void set_title( const std::string title ) const;
   void flip();
 private:
   int init_success;

@@ -54,6 +54,13 @@ SDL_Surface* SDLImage::getPtr() const
   return surf.get();
 }
 
+void SDLImage::setTransparent(int r, int g, int b) const
+{
+  // Map the color key
+  Uint32 colorKey = SDL_MapRGB( getPtr()->format, r, g, b);
+  // Set all pixels with color colorKey to be transparent
+  SDL_SetColorKey( getPtr(), SDL_SRCCOLORKEY, colorKey);
+}
 
 int SDLImage::get_width ( ) const
 {
