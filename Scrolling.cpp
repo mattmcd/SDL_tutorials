@@ -54,7 +54,7 @@ int main_loop(const std::string fileName,
   sdl.init_screen( s.w, s.h );
   
   // Background image
-  SDLImage bg( "tile100x100v03glide.jpg" );
+  SDLImage bg( "pics/tile100x100v03glide.jpg" );
 
   // Image with color keyed transparency
   SDLImage theImage( fileName );
@@ -122,7 +122,7 @@ int main( int argc, char* argv[])
 
   sdl.set_title( "Image Transparency and Background" );
 
-  std::string fileName("smiley_col_thumb.png");
+  std::string fileName("pics/smiley_col_thumb.png");
 
   std::string cam_type;
   if ( argc > 1)

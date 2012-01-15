@@ -36,7 +36,7 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
   sdl.init_screen( s.w, s.h );
   
   // Background image
-  SDLImage bg( "tile100x100v03glide.jpg" );
+  SDLImage bg( "pics/tile100x100v03glide.jpg" );
 
   for (int x=0; x<s.w; x += 100 )
     for (int y=0; y<s.h; y+=100 )
@@ -97,7 +97,7 @@ int main( int argc, char* argv[])
 
   sdl.set_title( "Image Transparency and Background" );
 
-  std::string fileName("smiley_col_thumb.png");
+  std::string fileName("pics/smiley_col_thumb.png");
 
   return main_loop( fileName, sdl );
 }

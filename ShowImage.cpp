@@ -51,7 +51,7 @@ int main( int argc, char* argv[])
   std::string fileName;
 
   if ( argc < 2 )
-    fileName = "mattmcd_sketch.bmp";
+    fileName = "pics/mattmcd_sketch.bmp";
   else
     fileName = argv[1];
 
