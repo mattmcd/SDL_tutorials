@@ -18,3 +18,8 @@ ShowBackground - displays two images above a tiled background image, with
 color-keyed transparency on one of them.  Uses event handling to close
 window when window close button is clicked.
 Usage: ./ShowBackground
+
+Scrolling - as for ShowBackground, but now with a window that can be
+scrolled over a lager area than displayed onscreen.
+Usage: ./Scrolling
+Arrow keys to scroll, q to quit.
