@@ -20,9 +20,11 @@ window when window close button is clicked.
 Usage: ./ShowBackground
 
 Scrolling - as for ShowBackground, but now with a window that can be
-scrolled over a lager area than displayed onscreen.
+scrolled over a lager area than displayed onscreen.  Different scroll modes
+are provided by the command line argument:
+- step (default if unspecified) moves camera by 10 pixels for each press
+- scroll continues scrolling while the key is held down
 Usage: ./Scrolling
-Arrow keys to scroll, q to quit.
-
-ContinueScrolling - As for scrolling, but now keeps scrolling if key held
-down.
+       ./Scrolling scroll
+       ./Scrolling step
+Arrow keys to scroll, q to quit.  
