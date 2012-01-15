@@ -17,12 +17,14 @@
 
 #include "SDLImage.hpp"
 #include "SDL_Wrapper.hpp"
-#include "StepCamera.hpp"
+#include "CameraFactory.hpp"
 #include <SDL/SDL.h>
 #include <iostream>
 #include <math.h>
 
-int main_loop(const std::string fileName, SDL_Wrapper &sdl)
+int main_loop(const std::string fileName, 
+              SDL_Wrapper &sdl, 
+              const std::string cam_type )
 {
   // Screen dimensions
   typedef struct {
@@ -44,7 +46,8 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
   int camLimitY = level.h - s.h;
 
   // Define camera
-  StepCamera theCamera( camLimitX, camLimitY );
+  cam_ptr theCamera = 
+    CameraFactory::Instance().getCamera( cam_type, camLimitX, camLimitY );
   t_camPos camPos;
 
   // Create the screen
@@ -69,7 +72,7 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
   while( !done )
   {
     // Draw background and images
-    camPos = theCamera.get_position();
+    camPos = theCamera->get_position();
 
     for (int x=0; x<level.w; x += 100 )
       for (int y=0; y<level.h; y+=100 )
@@ -96,9 +99,9 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
         // Quit the program
         done = true;
       }
-      if ( event.type == SDL_KEYDOWN )
+      if ( event.type == SDL_KEYDOWN || event.type == SDL_KEYUP )
       {
-        done = theCamera.handle_event( event );
+        done = theCamera->handle_event( event );
       }
     }
   }
@@ -108,7 +111,7 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
 
 int main( int argc, char* argv[])
 {
-  SDL_Wrapper sdl;
+  SDL_Wrapper& sdl = SDL_Wrapper::Instance();
 
   if ( sdl.get_init_success() < 0 )
   {
@@ -121,5 +124,14 @@ int main( int argc, char* argv[])
 
   std::string fileName("smiley_col_thumb.png");
 
-  return main_loop( fileName, sdl );
+  std::string cam_type;
+  if ( argc > 1)
+  {
+    cam_type = argv[1];
+  } else 
+  {
+    cam_type = "step";
+  }
+
+  return main_loop( fileName, sdl, cam_type);
 }

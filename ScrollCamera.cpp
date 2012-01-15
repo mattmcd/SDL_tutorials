@@ -20,6 +20,8 @@
 ScrollCamera::ScrollCamera( int limX_, int limY_) :
   camLimitX( limX_), camLimitY( limY_ ) 
 {
+  camPosX = 0;
+  camPosY = 0;
   camVelX = 0;
   camVelY = 0;
 };

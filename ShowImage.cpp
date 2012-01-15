@@ -39,7 +39,7 @@ void main_loop(const std::string fileName, SDL_Wrapper &sdl)
 
 int main( int argc, char* argv[])
 {
-  SDL_Wrapper sdl;
+  SDL_Wrapper& sdl = SDL_Wrapper::Instance();
 
   if ( sdl.get_init_success() < 0 )
   {

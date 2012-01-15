@@ -18,6 +18,12 @@
 
 #include "SDL_Wrapper.hpp"
 
+SDL_Wrapper& SDL_Wrapper::Instance() 
+{
+  static SDL_Wrapper theWrapper;
+  return theWrapper;
+}
+
 SDL_Wrapper::SDL_Wrapper()
 {
   init_success = SDL_Init( SDL_INIT_EVERYTHING );

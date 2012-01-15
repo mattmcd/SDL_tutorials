@@ -22,7 +22,7 @@
 
 class SDL_Wrapper {
 public:
-  SDL_Wrapper();
+  static SDL_Wrapper& Instance();
   ~SDL_Wrapper();
   int get_init_success();
   void init_screen( int width, int height );
@@ -31,6 +31,7 @@ public:
   void set_title( const std::string title ) const;
   void flip();
 private:
+  SDL_Wrapper();
   int init_success;
   SDL_Surface* screen;
 };
