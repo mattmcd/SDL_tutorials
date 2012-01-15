@@ -40,8 +40,8 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
   level.h = 480;
 
   // Camera position
-  int camLimitX = floor( (level.w - s.w)/2);
-  int camLimitY = floor( (level.h - s.h)/2);
+  int camLimitX = level.w - s.w;
+  int camLimitY = level.h - s.h;
 
   // Define camera
   Camera theCamera( camLimitX, camLimitY );
