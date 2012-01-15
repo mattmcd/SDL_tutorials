@@ -17,6 +17,7 @@
 
 #include "SDLImage.hpp"
 #include "SDL_Wrapper.hpp"
+#include "Camera.hpp"
 #include <SDL/SDL.h>
 #include <iostream>
 #include <math.h>
@@ -39,22 +40,18 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
   level.h = 480;
 
   // Camera position
-  int camPosX = floor( (level.w - s.w)/2);
-  int camPosY = floor( (level.h - s.h)/2);
+  int camLimitX = floor( (level.w - s.w)/2);
+  int camLimitY = floor( (level.h - s.h)/2);
 
-  // Camera velocity
-  int camVelX = 0;
-  int camVelY = 0;
-
-  // Camera step
-  int camStep = 10;
+  // Define camera
+  Camera theCamera( camLimitX, camLimitY );
+  t_camPos camPos;
 
   // Create the screen
   sdl.init_screen( s.w, s.h );
   
   // Background image
   SDLImage bg( "tile100x100v03glide.jpg" );
-
 
   // Image with color keyed transparency
   SDLImage theImage( fileName );
@@ -64,7 +61,6 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
   // TODO: Copy method for underlying surface
   SDLImage nonTransImage( fileName );
 
-
   // Display until window exit has been clicked
   bool done( false );
   // Structure to hold the event
@@ -73,22 +69,23 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
   while( !done )
   {
     // Draw background and images
+    camPos = theCamera.get_position();
 
     for (int x=0; x<level.w; x += 100 )
       for (int y=0; y<level.h; y+=100 )
-        sdl.blit_surface( bg, x-camPosX, y-camPosY );
+        sdl.blit_surface( bg, x-camPos.X, y-camPos.Y );
     // Offset for edge of screen
     int imHalfWidth = floor(theImage.get_width()/2);
 
     // Non-transparent image
     sdl.blit_surface( nonTransImage, 
-      floor(level.w/4) - imHalfWidth - camPosX,
-      floor(level.h/2) - floor(theImage.get_height() / 2) - camPosY);
+      floor(level.w/4) - imHalfWidth - camPos.X,
+      floor(level.h/2) - floor(theImage.get_height() / 2) - camPos.Y);
     
     // Transparent image
     sdl.blit_surface( theImage, 
-      3*floor(level.w/4) - imHalfWidth - camPosX,
-      floor(level.h/2) - floor(theImage.get_height() / 2) - camPosY);
+      3*floor(level.w/4) - imHalfWidth - camPos.X,
+      floor(level.h/2) - floor(theImage.get_height() / 2) - camPos.Y);
 
     sdl.flip( );
     // While there is an event to handle, process events
@@ -101,25 +98,7 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
       }
       if ( event.type == SDL_KEYDOWN )
       {
-        switch( event.key.keysym.sym )
-        {
-          case SDLK_UP:
-            camPosY = std::max(0, camPosY - camStep);
-            break;
-          case SDLK_DOWN:
-            camPosY = std::min(level.h - s.h, camPosY + camStep);
-            break;
-          case SDLK_LEFT:
-            camPosX = std::max(0, camPosX - camStep);
-            break;
-          case SDLK_RIGHT:
-            camPosX = std::min(level.w - s.w, camPosX + camStep);
-            break;
-          case SDLK_q:
-            // Quit
-            done = true;
-            break;
-        }
+        done = theCamera.handle_event( event );
       }
     }
   }
