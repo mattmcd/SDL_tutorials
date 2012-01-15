@@ -1,8 +1,8 @@
 // ==============================================================
 // 
-//       Filename:  Camera.cpp
+//       Filename:  StepCamera.cpp
 // 
-//    Description:  Camera class representing view of current level 
+//    Description:  StepCamera class representing view of current level 
 // 
 //        Version:  1.0
 //        Created:  15/01/12 16:31:11
@@ -14,10 +14,10 @@
 // 
 // ==============================================================
 
-#include "Camera.hpp"
+#include "StepCamera.hpp"
 #include <math.h>
 
-Camera::Camera( int camLimitX_, int camLimitY_ ) :
+StepCamera::StepCamera( int camLimitX_, int camLimitY_ ) :
   camLimitX( camLimitX_ ), camLimitY( camLimitY_ ) 
 {
   camPosX = 0;
@@ -25,7 +25,7 @@ Camera::Camera( int camLimitX_, int camLimitY_ ) :
   camStep = 10;
 };
 
-bool Camera::handle_event( SDL_Event event )
+bool StepCamera::handle_event( SDL_Event event )
 {
   bool done = false;
   if ( event.type == SDL_KEYDOWN )
@@ -52,7 +52,7 @@ bool Camera::handle_event( SDL_Event event )
   return done;
 }
 
-t_camPos Camera::get_position()
+t_camPos StepCamera::get_position()
 {
   t_camPos pos;
   pos.X = camPosX;

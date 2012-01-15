@@ -23,3 +23,6 @@ Scrolling - as for ShowBackground, but now with a window that can be
 scrolled over a lager area than displayed onscreen.
 Usage: ./Scrolling
 Arrow keys to scroll, q to quit.
+
+ContinueScrolling - As for scrolling, but now keeps scrolling if key held
+down.

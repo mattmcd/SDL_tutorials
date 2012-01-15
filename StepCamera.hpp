@@ -1,6 +1,6 @@
 // ==============================================================
 // 
-//       Filename:  Camera.hpp
+//       Filename:  StepCamera.hpp
 // 
 //    Description:  Camera defining view of level
 // 
@@ -14,24 +14,23 @@
 // 
 // ==============================================================
 
-#ifndef CAMERA_HPP
-#define CAMERA_HPP
+#ifndef STEPCAMERA_HPP
+#define STEPCAMERA_HPP
 
-#include <SDL/SDL.h>
-#include <algorithm>
+#include "Camera.hpp"
 
-typedef struct {
-  int X;
-  int Y;
-} t_camPos;
-
-class Camera {
+class StepCamera : public Camera {
 public:
-  Camera() {};
-  virtual bool handle_event( SDL_Event event ) =0;
-  virtual t_camPos get_position(void) =0;
-  virtual ~Camera() {};
+  StepCamera(int camLimitX_, int camLimitY_ );
+  virtual bool handle_event( SDL_Event event );
+  virtual t_camPos get_position(void);
+  virtual ~StepCamera() {};
 private:
+  int camPosX;
+  int camPosY;
+  int camLimitX;
+  int camLimitY;
+  int camStep;
 };
 
 #endif

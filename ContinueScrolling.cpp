@@ -1,6 +1,6 @@
 // ==============================================================
 // 
-//       Filename:  Scrolling.cpp
+//       Filename:  ContinueScrolling.cpp
 // 
 //    Description:  See
 //    http://lazyfoo.net/SDL_tutorials/lesson21/index.php
@@ -17,7 +17,7 @@
 
 #include "SDLImage.hpp"
 #include "SDL_Wrapper.hpp"
-#include "StepCamera.hpp"
+#include "ScrollCamera.hpp"
 #include <SDL/SDL.h>
 #include <iostream>
 #include <math.h>
@@ -44,7 +44,7 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
   int camLimitY = level.h - s.h;
 
   // Define camera
-  StepCamera theCamera( camLimitX, camLimitY );
+  ScrollCamera theCamera( camLimitX, camLimitY );
   t_camPos camPos;
 
   // Create the screen
@@ -96,7 +96,7 @@ int main_loop(const std::string fileName, SDL_Wrapper &sdl)
         // Quit the program
         done = true;
       }
-      if ( event.type == SDL_KEYDOWN )
+      if ( event.type == SDL_KEYDOWN || event.type == SDL_KEYUP )
       {
         done = theCamera.handle_event( event );
       }
