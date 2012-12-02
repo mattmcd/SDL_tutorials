@@ -17,7 +17,7 @@
 
 #include "SDLImage.hpp"
 #include "SDL_Wrapper.hpp"
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <iostream>
 
 void main_loop(const std::string fileName, SDL_Wrapper &sdl)

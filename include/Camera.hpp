@@ -17,7 +17,7 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <algorithm>
 
 typedef struct {

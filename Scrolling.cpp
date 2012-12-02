@@ -18,7 +18,7 @@
 #include "SDLImage.hpp"
 #include "SDL_Wrapper.hpp"
 #include "CameraFactory.hpp"
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <iostream>
 #include <math.h>
 

@@ -17,7 +17,7 @@
 #ifndef SDLIMAGE_H
 #define SDLIMAGE_H
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <tr1/memory>
 #include <string>
 

@@ -15,8 +15,8 @@
 // ==============================================================
 
 #include "SDLImage.hpp"
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include <iostream>
 
 SDLImage::SDLImage( const std::string &fileName )

@@ -17,7 +17,7 @@
 #ifndef SDL_WRAPPER_HPP
 #define SDL_WRAPPER_HPP
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include "SDLImage.hpp"
 
 class SDL_Wrapper {
